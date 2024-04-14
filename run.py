@@ -166,28 +166,7 @@ async def handle_message(message: Message):
     await message.answer_document(FSInputFile("out.xlsx"))
     logger.info("All Done!")
 
-async def test1():
-    result = await collect_data(2021, "38902-15")
-    df = pd.DataFrame(result)
-    df.to_excel("out.xlsx")
 
-    logger.info("All Done!")
-
-async def test2():
-    result = []
-    file = "nums.txt"
-    for year in YEARS:
-        async with aiofiles.open(file) as mit_n_f:
-            mit_numbers = await mit_n_f.readlines()
-            mit_numbers = [x.strip() for x in mit_numbers]
-            logger.info(f'Номера СИ загружены:{"\n".join(mit_numbers)}')
-        for mit_number in mit_numbers:
-            logger.info(f'Обрабатываю номер {mit_number}')
-            result += await collect_data(year, mit_number)
-            await asyncio.sleep(1)
-        await asyncio.sleep(1)
-    df = pd.DataFrame(result)
-    df.to_excel("out.xlsx")
 
 
 asyncio.run(main())
