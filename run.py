@@ -159,8 +159,9 @@ async def handle_message(message: Message):
     
 
 
-    res = (await asyncio.wait(tasks))[0].pop().result()
-    out = res
+    out = []
+    for i in (await asyncio.wait(tasks))[0]:
+        out += i.result()
     df = pd.DataFrame(out)
     df.to_excel("out.xlsx")
     await message.answer_document(FSInputFile("out.xlsx"))
