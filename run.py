@@ -66,7 +66,7 @@ async def collect_data(year: int, mit_number: str):
         
         result = response_json["result"]["items"]
         if response_json["result"]["count"] > rows + start:
-            logger.info(f"{response_json["result"]["count"] - (rows+start)} remaining ({round((response_json["result"]["count"] - (rows+start))/100)} s)")
+            logger.info(f'{response_json["result"]["count"] - (rows+start)} remaining ({round((response_json["result"]["count"] - (rows+start))/100)} s)')
             result += await get_small_data(start=start + rows)
 
         return result
