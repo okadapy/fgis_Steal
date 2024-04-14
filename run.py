@@ -77,7 +77,7 @@ async def collect_data(year: int, mit_number: str):
             try:
                 fulldata_tasks.add(asyncio.create_task(session.get(FGIS_ENDPOINT + "/" + vri_id, proxy=await pm())))
                 logger.info(
-                    f"{idx+1}. VRI ID: {vri_id} handled. {len(vri_ids) - (idx+1)} remains. ({len(vri_ids) - (idx+1)} s)"
+                    f'{idx+1}. VRI ID: {vri_id} handled. {len(vri_ids) - (idx+1)} remains. ({len(vri_ids) - (idx+1)} s)'
                 )
             except:
                 global out
@@ -180,9 +180,9 @@ async def test2():
         async with aiofiles.open(file) as mit_n_f:
             mit_numbers = await mit_n_f.readlines()
             mit_numbers = [x.strip() for x in mit_numbers]
-            logger.info(f"Номера СИ загружены:\n{"\n".join(mit_numbers)}")
+            logger.info(f'Номера СИ загружены:\n{"\n".join(mit_numbers)}')
         for mit_number in mit_numbers:
-            logger.info(f"Обрабатываю номер {mit_number}")
+            logger.info(f'Обрабатываю номер {mit_number}')
             result += await collect_data(year, mit_number)
             await asyncio.sleep(1)
         await asyncio.sleep(1)
